@@ -1,0 +1,96 @@
+{% load static %}
+
+<!-- Footer top section -->
+	<section class="footer-top-section">
+		<div class="container">
+			<div class="footer-top-bg">
+				<img src="{% static 'img/footer-top-bg.png' %}" alt="">
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="footer-logo text-white">
+						<img src="{% static 'img/footer-logo.png' %}" alt="">
+						<p>Find Your Comfort in Our Gaming World!</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-widget mb-5 mb-md-0">
+						<h4 class="fw-title">Latest Posts</h4>
+                        {% if latest_blog %}
+                            {% for r in latest_blog %}
+						<div class="latest-blog">
+							<div class="lb-item">
+								<div class="lb-thumb set-bg" data-setbg="{{ r.photo.url }}"></div>
+								<div class="lb-content">
+									<div class="lb-date">{{ r.date }}</div>
+									<p>{{ r.description}}</p>
+									<a href="#" class="lb-author">By {{ r.created_by }}</a>
+								</div>
+							</div>
+                         </div>
+                             {% endfor %}
+                            {% else %}
+                          <p> do nothing </p>
+                         {% endif %}
+
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 ">
+					<div class="footer-widget">
+						<h4 class="fw-title">Top Comments</h4>
+						<div class="top-comment">
+							<div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/1.jpg' %}"></div>
+								<div class="tc-content">
+									<p><a href="#">Jesse Pinkman</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div> <br>
+
+                            <div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/2.jpg' %}"></div>
+								<div class="tc-content">
+									<p><a href="#">Michael James</a> <span>on</span>Cras sit amet sapien aliquam</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div><br>
+                            <div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/3.jpg' %}"></div>
+								<div class="tc-content">
+									<p><a href="#">Justin More</a> <span>on</span> Lorem ipsum dolor consecsit amet, co</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div><br>
+                            <div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/1.jpg' %}"></div>
+								<div class="tc-content">
+									<p><a href="#">Robart Pattinson</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer top section end -->
+
+<!-- Footer section -->
+	<footer class="footer-section">
+		<div class="container">
+			<ul class="footer-menu">
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li><a href="{% url 'games' %}">Games</a></li>
+					<li><a href="{% url 'blog' %}">Blog</a></li>
+					<li><a href="{% url 'forum' %}">Forums</a></li>
+					<li><a href="{% url 'contact' %}">Contact</a></li>
+			</ul>
+			<p class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://gamezone.com" target="_blank">GamezoneBD</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+		</div>
+	</footer>
+
+	<!-- Footer section end -->

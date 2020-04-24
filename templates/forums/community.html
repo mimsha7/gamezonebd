@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block contant %}
+	<!-- Latest news section -->
+	<div class="latest-news-section">
+		<div class="ln-title">Latest News</div>
+		<div class="news-ticker">
+			<div class="news-ticker-contant">
+				<div class="nt-item"><span class="new">new</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+				<div class="nt-item"><span class="strategy">strategy</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+				<div class="nt-item"><span class="racing">racing</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+			</div>
+		</div>
+	</div>
+	<!-- Latest news section end -->
+
+
+
+	<!-- Page info section -->
+
+
+	<section class="page-info-section set-bg" data-setbg="{% static 'img/new_bg.jpg' %}">
+		<div class="pi-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-5 col-lg-6 text-white">
+						<h2>Our Community</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page info section -->
+
+
+	<!-- Page section -->
+	<section class="page-section community-page set-bg" data-setbg="{% static 'img/community-bg.jpg' %}">
+		<div class="community-warp spad">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h3 class="community-top-title">All Members ({{ member_no }})</h3>
+					</div>
+					<div class="col-md-6 text-lg-right">
+						<div class="community-filter">
+							<h3 for="fdf5">Total Posts: {{ total_post }}</h3>
+						</div>
+					</div>
+				</div>
+
+
+                {% include 'partial/_alerts.html' %}
+
+                <div style="margin-bottom: 50px;padding: 40px;background-color: #ffb320;border-radius: 30px 0 30px 0;border: 4px solid #131313;)">
+                    <form action="{% url 'forum' %}" method="POST">
+                    {% csrf_token %}
+                          {% if user.profile.image %}
+                                <input type="hidden" name="avatar" value="{{ user.profile.image }}">
+                              {% else %}
+                                <input type="hidden" name="avatar" value="{{ user.profile.image.default }}">
+                              {% endif %}
+                              <input type="hidden" name="user_name" value="{% if user.first_name %}
+                                {{ user.first_name }} {{ user.last_name }}
+                                {% else %}
+                                {{ user.username }}
+                                {% endif %}
+                                ">
+                          <div style="font-size: larger;font-weight: bolder;" class="form-group">
+                            <label for="exampleInputPassword1">Post</label>
+                            <input style="border: 2px solid black;" type="text" class="form-control" id="exampleInputPassword1" placeholder="post" name="post" required>
+                          </div>
+
+                          <button type="submit" style=" display: inline-block;
+                                                        text-align: center;
+                                                        font-size: 15px;
+                                                        color: #ffb320;
+                                                        padding: 15px 30px;
+                                                        min-width: 153px;
+                                                        border-radius: 50px;
+                                                        font-weight: 500;
+                                                        border: none;
+                                                        background: #131313;
+                                                        cursor: pointer;">Submit</button>
+                    </form>
+                    </div>
+
+
+
+				<ul class="community-post-list">
+                    {% if posts %}
+                        {% for post in posts %}
+					<li>
+						<div class="community-post">
+                        {% if post.avatar %}
+							<div class="author-avator set-bg" data-setbg="{{ post.avatar.url }}"></div>
+                        {% else %}
+                            <div class="author-avator set-bg" data-setbg="{% static 'img/default.jpg' %}"></div>
+                        {% endif %}
+							<div class="post-content">
+								<h5>{{ post.name }}<span>posted an update</span></h5>
+								<div class="post-date">{{ post.date }}</div>
+								<p>{{ post.post }}</p>
+                                {% if post.image %}
+                                <div class="attachment-file">
+									<img src="{% static post.image.url %}" alt="">
+								</div>
+                                {% endif %}
+							</div>
+						</div>
+					</li>
+                        {% endfor %}
+                    {% else %}
+                        <h1>There is no Post</h1>
+					{% endif %}
+				</ul>
+				 <div class="row ">
+                            <div class="col-md-12" >
+                                {% if posts.has_other_pages %}
+                                  <ul class="pagination d-flex justify-content-center">
+                                    {% if posts.has_previous %}
+                                        <li class=" blog_dot">
+                                            <a style="color: #131313;border-radius: 10px;padding: 10px 15px 10px 15px;margin-right: 5px;border: 2px solid #131313;" href="?page={{ posts.previous_page_number }}" class="page-link">&laquo;</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a style="color: #131313;border-radius: 10px;padding: 10px 15px 10px 15px;margin-right: 5px;border: 2px solid #131313;" class="page-link">&laquo;</a>
+                                        </li>
+                                    {% endif %}
+
+                                  {% for post in posts.paginator.page_range %}
+                                      {% if posts.number == post %}
+                                          <li class="page-item active">
+                                            <a style="background: #ffb320;color: #131313;border: none;border-radius: 10px;padding: 10px 15px 10px 15px;margin-right: 5px;border: 2px solid #131313;" class="page-link">{{ post }}</a>
+                                          </li>
+                                      {% else %}
+                                          <li class="page-item">
+                                          <a style="color: #131313;border-radius: 10px;padding: 10px 15px 10px 15px;margin-right: 5px;border: 2px solid #131313;" href="?page={{ post }}" class="page-link">{{ post }}</a>
+                                          </li>
+                                      {% endif %}
+                                  {% endfor %}
+                                  {% if posts.has_next %}
+                                    <li class="page-item">
+                                        <a style="color: #131313;border-radius: 10px;padding: 10px 15px 10px 15px;margin-right: 5px;border: 2px solid #131313;" href="?page={{ posts.next_page_number }} " class="page-link">&raquo;</a>
+                                    </li>
+                                  {% else %}
+                                      <li class="page-item disabled">
+                                        <a style="color: #131313;border-radius: 10px;padding: 10px 15px 10px 15px;margin-right: 5px;border: 2px solid #131313;" class="page-link">&raquo;</a>
+                                      </li>
+                                  {% endif %}
+                                  </ul>
+                                {% endif %}
+                            </div>
+                          </div>
+			</div>
+		</div>
+	</section>
+	<!-- Page section end -->
+{% endblock %}

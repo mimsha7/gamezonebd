@@ -1,0 +1,30 @@
+games
+------------------
+name = charfield
+created to
+updated to
+photo= imagefield
+star =positiveintegerfield
+review_int = decimalfield
+review_str= charfirld
+
+recent review is by filter method !!!
+
+----------blog-------
+name=charfield
+dexcrioptoin = textfield
+photo=imagefield
+catagory_name = charfield
+
+----forum-----
+photo = image field
+created to
+updated to
+name = char field
+comment = text field
+
+-------contact--------
+name = charfield
+email = email field
+subject = charfield
+message = text field

@@ -1,0 +1,51 @@
+{% load static %}
+
+
+<!-- Page Preloder -->
+
+
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section">
+		<div class="container">
+			<!-- logo -->
+			<a class="site-logo" href="{% url 'home' %}">
+
+                    <img src="{% static 'img/logo.png' %}" alt="">
+			</a>
+
+				{% if user.is_authenticated %}
+                    <div style="background-color: #131313;" class="user-panel ">
+                    {% if user.profile.image %}
+                    <a style="color: #ffb320;font-size: larger" href="{% url 'logout' %}"><img style="width: 70px;height: 50px;border: 3px solid #ffb320;margin-right: 8px" class="rounded account-img" src="{{ user.profile.image.url }}">  {{ user.username }}</a>
+                        {% else %}
+                       <a style="color: #ffb320;font-size: larger" href="{% url 'logout' %}"><img style="width: 70px;height: 50px;border: 3px solid #ffb320;margin-right: 8px" class="rounded account-img" src="{% static 'img/default.jpg' %}">  {{ user.username }}</a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="user-panel">
+                    <a href="{% url 'login' %}">Login</a>  /  <a href="{% url 'register' %}">Register</a>
+                    </div>
+                {% endif %}
+
+			<!-- responsive -->
+			<div class="nav-switch">
+				<i class="fa fa-bars"></i>
+			</div>
+			<!-- site menu -->
+			<nav class="main-menu">
+				<ul>
+					<li><a href="{% url 'home' %}">Home</a></li>
+
+					<li><a href="{% url 'games' %}">Games</a></li>
+					<li><a href="{% url 'blog' %}">Blog</a></li>
+					<li><a href="{% url 'forum' %}">Forums</a></li>
+					<li><a href="{% url 'contact' %}">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<!-- Header section end -->

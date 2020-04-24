@@ -1,0 +1,38 @@
+h4{
+    color: white;
+    text-align: center;
+}
+.card-header{
+    background-color: #131313;
+    color: white;
+
+}
+
+.card-body{
+    background-color: #ffb320;
+    color: white;
+    border-radius: 0 0 15px 15px;
+}
+#log_button{
+    background-color: #131313;
+    border: none;
+    padding: 10px;
+
+}
+
+#reg_button{
+    background-color: #131313;
+    border: none;
+    padding: 10px;
+}
+#full{
+    border-radius: 50px;
+}
+#login{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+#register{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}

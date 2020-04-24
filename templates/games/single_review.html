@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contant %}
+
+  <section class="page-section review-page spad">
+  <div class="container" style="margin-top: 100px;text-align: center">
+    {% if single %}
+        {% for ass in single %}
+            <div class="row">
+               <div class="review-cover set-bg" data-setbg="" alt="" width="600px" height="550px"><br>
+                  <div><img src="{{ ass.photo.url }}"></div><br>
+                    <h2 class="text-uppercase">{{ass.name}}</h2><br>
+                     <div class="align-content-center" style="text-align-all: center;margin-left: 272px;margin-right: 272px">
+                          <h5> About This Game: {{ ass.about}}</h5>
+                         <br>
+                        <ul class="list-inline">
+                            <br><li> Release Date: {{ ass.release_date }}</li>
+                            <li> Genre: {{ ass.category }}</li>
+                            <li> Platform : {{ ass.platform }}</li>
+                            <li> Developer : {{ ass.developer }}</li>
+                            <li> Publisher : {{ ass.publisher }}</li>
+                            <li> System Requirement : {{ ass.sys_requirement }}</li>
+                         </ul>
+                       </div>
+                    <br/>
+                {% endfor %}
+               {% else %}
+                <p> do nothing </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+  </section>
+
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contant %}
+
+	<!-- Latest game news section -->
+	<div class="latest-news-section">
+		<div class="ln-title">Latest Games</div>
+		<div class="news-ticker">
+			<div class="news-ticker-contant">
+                {% if data %}
+                {% for d in data %}
+				<div class="nt-item"><span class="new">{{ d.category}}</span>{{ d.name }}</div>
+				{% endfor %}
+                {% endif %}
+			</div>
+		</div>
+	</div>
+	<!-- Latest game news section end -->
+
+	<!-- Page info section -->
+	<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/7.jpg' %}">
+		<div class="pi-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-5 col-lg-6 text-white">
+						<h2 ><span style="color: white;background-color: orange;width: 50%;text-align: center;margin: 5px;padding: 5px 15px 5px 15px;border-radius: 8px;">Games</span></h2>
+						<p>A video game is an electronic game that involves interaction with a user interface to generate visual feedback on a two- or three-dimensional video display device such as a touchscreen/mobile/tab, virtual reality headset or monitor/TV set.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page info section -->
+
+	<!-- Page section -->
+	<section class="page-section review-page spad">
+		<div class="container">
+			<div class="row">
+             {% if data %}
+              {% for d in data %}
+				<div class="col-md-6">
+					<div class="review-item">
+                     <a img href="{% url 'single_review' d.id %}">
+						 <div class="review-cover set-bg" data-setbg="{{d.photo.url}}">
+							<div class="score yellow">{{d.review_int}}</div>
+						</div>
+                     </a>
+						<div class="review-text">
+							<h3>{{d.name}}</h3>
+							<div class="rating">
+                               {% if d.review_str == 3 %}
+                                    <i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star is-fade"></i>
+								<i class="fa fa-star is-fade"></i>
+                                {% endif %}
+								{% if d.review_str == 4 %}
+                                    <i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star is-fade"></i>
+                                {% endif %}
+                                {% if d.review_str == 5 %}
+                                    <i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+                                {% endif %}
+							</div>
+    <h5 ><span style="color: white;background-color: #ff1d55;width: 50%;text-align: center;margin: 5px;padding: 5px 15px 5px 15px;border-radius: 8px;" >
+                                {{d.category}}</span></h5>
+							<p>{{d.content}}</p>
+						</div>
+            <div class="text-center pt-4">
+				<a href="{% url 'single_review' d.id %}" class="site-btn btn-sm">Details</a>
+			</div>
+					</div>
+				</div>
+            {% endfor %}
+             {% else %}
+                 <p> do nothing </p>
+         {% endif %}
+    		</div>
+
+       </div>
+	</section>
+	<!-- Page section end -->
+
+	<!-- Review section -->
+	<section class="review-section review-dark spad set-bg" data-setbg="{% static 'img/review-bg-2.jpg' %}">
+		<div class="container">
+			<div class="section-title text-white">
+				<div class="cata new">new</div>
+				<h2>Recent Games</h2>
+			</div>
+			<div class="row text-white">
+            {% if recent %}
+              {% for r in recent %}
+				<div class="col-lg-3 col-md-6">
+					<div class="review-item">
+						<div class="review-cover set-bg" data-setbg="{{ r.photo.url }}">
+							<div class="score yellow">{{r.review_int}}</div>
+						</div>
+						<div class="review-text">
+							<h5>{{ r.name }}</h5>
+							<p>{{ r.content}}</p>
+						</div>
+					</div>
+				</div>
+            {% endfor %}
+                {% else %}
+                <p> do nothing </p>
+        {% endif %}
+            </div>
+		</div>
+	</section>
+
+	<!-- Review section end -->
+
+{% endblock %}
