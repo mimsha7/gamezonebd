@@ -19,7 +19,7 @@
 
 
 	<!-- Page info section -->
-	<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/1.jpg' %}">
+	<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/unnamed.jpg' %}">
 		<div class="pi-content">
 			<div class="container">
 				<div class="row">
@@ -58,34 +58,32 @@
 								</div>
 							</div>	
 						</div>
-
                         {% endfor %}
                      {%else%}
-                            <p>There is no block.</p>
+                            <p> Nothing Match! </p>
                     {% endif %}
-                    </div>
+                    </div><br>
 
-					<div class="site-pagination">
-						<span class="active">01.</span>
-						<a href="#">02.</a>
-						<a href="#">03.</a>
-					</div>
-				</div>
+                {% include 'pagination.html' %}
+                </div>
+
 				<!-- sidebar -->
 	        <div class="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
 					<!-- widget -->
 					<div class="widget-item">
-						<form class="search-widget">
-							<input type="text" placeholder="Search">
-							<button><i class="fa fa-search"></i></button>
+						<form method="GET" action="{% url 'search' %}">
+                            {% csrf_token %}
+							<input name="src" value="{{ request.GET.src }}" placeholder="Search..">
+							<button class="btn btn-primary" type="submit">Search
+                            </button>
 						</form>
 					</div>
 					<!-- widget -->
 					<div class="widget-item">
-						<h4 class="widget-title">Latest Post</h4>
-						<div class="latest-blog">
-                            {% if latest_blog %}
+						<h4 class="widget-title">Latest Posts</h4>
+                         {% if latest_blog %}
                             {% for r in latest_blog %}
+						<div class="latest-blog">
 							<div class="lb-item">
 								<div class="lb-thumb set-bg" data-setbg="{{ r.photo.url }}"></div>
 								<div class="lb-content">
@@ -94,11 +92,11 @@
                                 <a href="#" class="lb-author">By {{ r.created_by }}</a>
 								</div>
 							</div>
+                                </div>
                             {% endfor %}
                             {% else %}
                           <p> do nothing </p>
                          {% endif %}
-						</div>
 					</div>
 					<!-- widget -->
 					<div class="widget-item">
@@ -143,9 +141,11 @@
 						<div class="review-item">
                             {% if recent %}
                             {% for r in recent %}
+                             <a img href="{% url 'single_review' r.id %}">
 							<div class="review-cover set-bg" data-setbg="{{ r.photo.url }}">
 								<div class="score yellow">{{r.review_int}}</div>
 							</div>
+                            </a>
 							<div class="review-text">
 								<h5>{{r.name}}</h5>
 								<p>{{ r.content }}</p>

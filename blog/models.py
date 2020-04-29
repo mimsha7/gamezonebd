@@ -9,6 +9,11 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+    class Meta:
+        db_table = 'categories'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
 
 class Blog(models.Model):
     name = models.CharField(max_length=200)
@@ -20,3 +25,6 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        db_table = 'blogs'

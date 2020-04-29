@@ -16,7 +16,9 @@ def games(request):
 
 def single_review(request,game_id):
     single = Review.objects.filter(pk=game_id)
+    latest_blog = Blog.objects.order_by('-date')[:3]
     context = {
         'single': single,
+        'latest_blog': latest_blog,
     }
     return render(request, 'games/single_review.html', context)

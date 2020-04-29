@@ -18,7 +18,7 @@
 	<!-- Latest game news section end -->
 
 	<!-- Page info section -->
-	<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/7.jpg' %}">
+	<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/147-1470130_warface-png.png' %}">
 		<div class="pi-content">
 			<div class="container">
 				<div class="row">
@@ -70,7 +70,7 @@
 								<i class="fa fa-star"></i>
                                 {% endif %}
 							</div>
-    <h5 ><span style="color: white;background-color: #ff1d55;width: 50%;text-align: center;margin: 5px;padding: 5px 15px 5px 15px;border-radius: 8px;" >
+                             <h5 ><span style="color: white;background-color: #ff1d55;width: 50%;text-align: center;margin: 5px;padding: 5px 15px 5px 15px;border-radius: 8px;" >
                                 {{d.category}}</span></h5>
 							<p>{{d.content}}</p>
 						</div>
@@ -101,9 +101,11 @@
               {% for r in recent %}
 				<div class="col-lg-3 col-md-6">
 					<div class="review-item">
+                        <a img href="{% url 'single_review' r.id %}">
 						<div class="review-cover set-bg" data-setbg="{{ r.photo.url }}">
 							<div class="score yellow">{{r.review_int}}</div>
 						</div>
+                        </a>
 						<div class="review-text">
 							<h5>{{ r.name }}</h5>
 							<p>{{ r.content}}</p>

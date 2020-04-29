@@ -30,6 +30,7 @@ def forum(request):
         paginator = Paginator(posts,7)
         pages = request.GET.get('page')
         post_page = paginator.get_page(pages)
+
         latest_blog = Blog.objects.order_by('-date')[:3]
         context = {
             'posts':post_page,
